@@ -1,9 +1,17 @@
 import type { WrapperProps } from "../types/wrapper";
-import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
+import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
+import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import { useState } from "react";
+import householdLogo from "../assets/earlier_household_logo-removebg-preview.png";
 
 const PageWrapper = ({ children }: WrapperProps) => {
   const theme = useTheme();
+  const [navbarOpen, setNavBarOpen] = useState<boolean>(false);
   return (
     <Box
       sx={{
@@ -11,27 +19,122 @@ const PageWrapper = ({ children }: WrapperProps) => {
         display: "flex",
         width: "100%",
         height: "100vh",
+        borderRadius : "50%"
       }}
     >
-       
+      {navbarOpen && (
+        <>
           <Box
-          width={"10%"}
+            width={"12%"}
             sx={{
-              backgroundColor: theme.palette.grey[500],
-              boxShadow : theme.shadows[10],
+              boxShadow: theme.shadows[10],
               height: "100%",
-              "&:hover": {
-                backgroundColor: theme.palette.success.main,
-              },
-            }}
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between"
+                        }}
           >
-            <Typography>Dev</Typography>
+            <Box
+              width={"100%"}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                mt: theme.spacing(4),
+                alignItems: "center",
+                height: "10%",
+              }}
+            >
+              <Box
+                component="img"
+                src={householdLogo}
+                alt="Household Logo"
+                sx={{ width: "150px", height: "150px"}}
+              />
+            </Box>
+
+            <Box width={"100%"} sx={{ height: "70%", mt: theme.spacing(3),cursor : "pointer",padding : "10px" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  height: "50px",
+                  padding: theme.spacing(2),
+                  alignItems: "center",
+                  gap: "10px",
+                  "&:hover" : {
+                    backgroundColor : theme.palette.grey[100],
+                    borderRadius  : "10%"
+                  }
+                }}
+              >
+                <HomeOutlinedIcon />
+                <Typography variant="h6">Home</Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  height: "50px",
+                  padding: theme.spacing(2),
+                  alignItems: "center",
+                  gap: "10px",
+                  "&:hover" : {
+                    backgroundColor : theme.palette.grey[100],
+                    borderRadius  : "10%"
+                  }
+                }}
+              >
+                <TimelineOutlinedIcon />
+                <Typography variant="h6">Timeline</Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  height: "50px",
+                  padding: theme.spacing(2),
+                  alignItems: "center",
+                  gap: "10px",
+                  "&:hover" : {
+                    backgroundColor : theme.palette.grey[100],
+                    borderRadius  : "10%"
+                  }
+                }}
+              >
+                <AnalyticsOutlinedIcon />
+                <Typography variant="h6">Analytics</Typography>
+              </Box>
+            </Box>
+            <Box sx={{ mb: theme.spacing(3) }}>
+              <Button
+                sx={{
+                  width: 50,
+                  height: 50,
+                  minWidth: 0,
+                  borderRadius: "60%",
+                  boxShadow: theme.shadows[10],
+                }}
+                onClick={() => setNavBarOpen(false)}
+              >
+                {" "}
+                <ArrowBackOutlinedIcon />{" "}
+              </Button>
+            </Box>
           </Box>
-          <Box width={"90%"}>
-          {children}
-          </Box>
-     
-    
+        </>
+      )}
+      <Box
+        width={navbarOpen ? "90%" : "100%"}
+        sx={{ backgroundColor: theme.palette.success.main }}
+      >
+        {children}
+      </Box>
+
       <Button
         sx={{
           width: 50,
@@ -42,11 +145,32 @@ const PageWrapper = ({ children }: WrapperProps) => {
           boxShadow: theme.shadows[10],
           top: theme.spacing(3),
           right: theme.spacing(5),
+          backgroundColor: theme.palette.background.default,
         }}
       >
         {" "}
         <SettingsIcon />{" "}
       </Button>
+      {!navbarOpen && (
+        <Button
+          sx={{
+            width: 50,
+            height: 50,
+            minWidth: 0,
+            position: "absolute",
+            borderRadius: "60%",
+            boxShadow: theme.shadows[10],
+            bottom: theme.spacing(3),
+            left: theme.spacing(5),
+
+            backgroundColor: theme.palette.background.default,
+          }}
+          onClick={() => setNavBarOpen(true)}
+        >
+          {" "}
+          <ArrowForwardIosOutlinedIcon />{" "}
+        </Button>
+      )}
     </Box>
   );
 };
