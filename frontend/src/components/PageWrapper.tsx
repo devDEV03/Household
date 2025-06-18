@@ -8,10 +8,14 @@ import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import { useState } from "react";
 import householdLogo from "../assets/earlier_household_logo-removebg-preview.png";
+import { useNavigate } from "react-router-dom";
 
 const PageWrapper = ({ children }: WrapperProps) => {
   const theme = useTheme();
   const [navbarOpen, setNavBarOpen] = useState<boolean>(false);
+  
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -66,9 +70,12 @@ const PageWrapper = ({ children }: WrapperProps) => {
                   gap: "10px",
                   "&:hover" : {
                     backgroundColor : theme.palette.grey[100],
-                    borderRadius  : "10%"
+                    borderRadius  : "10%",
+                    textDecoration : "underline"
                   }
                 }}
+
+                onClick={ () => navigate("/")}
               >
                 <HomeOutlinedIcon />
                 <Typography variant="h6">Home</Typography>
@@ -84,9 +91,11 @@ const PageWrapper = ({ children }: WrapperProps) => {
                   gap: "10px",
                   "&:hover" : {
                     backgroundColor : theme.palette.grey[100],
-                    borderRadius  : "10%"
+                    borderRadius  : "10%",
+                    textDecoration : "underline"
                   }
                 }}
+                onClick={() => navigate("/timeline")}
               >
                 <TimelineOutlinedIcon />
                 <Typography variant="h6">Timeline</Typography>
@@ -102,9 +111,12 @@ const PageWrapper = ({ children }: WrapperProps) => {
                   gap: "10px",
                   "&:hover" : {
                     backgroundColor : theme.palette.grey[100],
-                    borderRadius  : "10%"
+                    borderRadius  : "10%",
+                    textDecoration : "underline"
                   }
                 }}
+                
+                onClick={() => navigate("/stats")}
               >
                 <AnalyticsOutlinedIcon />
                 <Typography variant="h6">Analytics</Typography>
