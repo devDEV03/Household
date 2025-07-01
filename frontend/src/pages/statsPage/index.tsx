@@ -1,10 +1,11 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
 const StatsPage = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+     <Typography>Stats</Typography> 
+    </>
   )
 }
 

@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const PageWrapper = ({ children }: WrapperProps) => {
   const theme = useTheme();
   const [navbarOpen, setNavBarOpen] = useState<boolean>(false);
-  
+
   const navigate = useNavigate();
 
   return (
@@ -23,126 +23,133 @@ const PageWrapper = ({ children }: WrapperProps) => {
         display: "flex",
         width: "100%",
         height: "100vh",
-        borderRadius : "50%"
+        borderTopRightRadius : "50%",
       }}
     >
-      {navbarOpen && (
-        <>
+      <>
+        <Box
+          width={navbarOpen ? "12%" : "0%"}
+          sx={{
+            boxShadow: theme.shadows[10],
+            height: "100%",
+            alignItems: "center",
+            display: navbarOpen ? "flex" : "none",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
           <Box
-            width={"12%"}
+            width={"100%"}
             sx={{
-              boxShadow: theme.shadows[10],
-              height: "100%",
-              alignItems: "center",
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-                        }}
+              flexDirection: "row",
+              justifyContent: "space-around",
+              mt: theme.spacing(4),
+              alignItems: "center",
+              height: "10%",
+            }}
           >
             <Box
-              width={"100%"}
+              component="img"
+              src={householdLogo}
+              alt="Household Logo"
+              sx={{ width: "150px", height: "150px" }}
+            />
+          </Box>
+
+          <Box
+            width={"100%"}
+            sx={{
+              height: "70%",
+              mt: theme.spacing(3),
+              cursor: "pointer",
+              padding: "10px",
+            }}
+          >
+            <Box
               sx={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-around",
-                mt: theme.spacing(4),
+                width: "100%",
+                height: "50px",
+                padding: theme.spacing(2),
                 alignItems: "center",
-                height: "10%",
+                gap: "10px",
+                "&:hover": {
+                  backgroundColor: theme.palette.grey[100],
+                  borderRadius: "10%",
+                  textDecoration: "underline",
+                },
               }}
+              onClick={() => navigate("/")}
             >
-              <Box
-                component="img"
-                src={householdLogo}
-                alt="Household Logo"
-                sx={{ width: "150px", height: "150px"}}
-              />
+              <HomeOutlinedIcon />
+              <Typography variant="h6">Home</Typography>
             </Box>
-
-            <Box width={"100%"} sx={{ height: "70%", mt: theme.spacing(3),cursor : "pointer",padding : "10px" }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  width: "100%",
-                  height: "50px",
-                  padding: theme.spacing(2),
-                  alignItems: "center",
-                  gap: "10px",
-                  "&:hover" : {
-                    backgroundColor : theme.palette.grey[100],
-                    borderRadius  : "10%",
-                    textDecoration : "underline"
-                  }
-                }}
-
-                onClick={ () => navigate("/")}
-              >
-                <HomeOutlinedIcon />
-                <Typography variant="h6">Home</Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  width: "100%",
-                  height: "50px",
-                  padding: theme.spacing(2),
-                  alignItems: "center",
-                  gap: "10px",
-                  "&:hover" : {
-                    backgroundColor : theme.palette.grey[100],
-                    borderRadius  : "10%",
-                    textDecoration : "underline"
-                  }
-                }}
-                onClick={() => navigate("/timeline")}
-              >
-                <TimelineOutlinedIcon />
-                <Typography variant="h6">Timeline</Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  width: "100%",
-                  height: "50px",
-                  padding: theme.spacing(2),
-                  alignItems: "center",
-                  gap: "10px",
-                  "&:hover" : {
-                    backgroundColor : theme.palette.grey[100],
-                    borderRadius  : "10%",
-                    textDecoration : "underline"
-                  }
-                }}
-                
-                onClick={() => navigate("/stats")}
-              >
-                <AnalyticsOutlinedIcon />
-                <Typography variant="h6">Analytics</Typography>
-              </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                width: "100%",
+                height: "50px",
+                padding: theme.spacing(2),
+                alignItems: "center",
+                gap: "10px",
+                "&:hover": {
+                  backgroundColor: theme.palette.grey[100],
+                  borderRadius: "10%",
+                  textDecoration: "underline",
+                },
+              }}
+              onClick={() => navigate("/timeline")}
+            >
+              <TimelineOutlinedIcon />
+              <Typography variant="h6">Timeline</Typography>
             </Box>
-            <Box sx={{ mb: theme.spacing(3) }}>
-              <Button
-                sx={{
-                  width: 50,
-                  height: 50,
-                  minWidth: 0,
-                  borderRadius: "60%",
-                  boxShadow: theme.shadows[10],
-                }}
-                onClick={() => setNavBarOpen(false)}
-              >
-                {" "}
-                <ArrowBackOutlinedIcon />{" "}
-              </Button>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                width: "100%",
+                height: "50px",
+                padding: theme.spacing(2),
+                alignItems: "center",
+                gap: "10px",
+                "&:hover": {
+                  backgroundColor: theme.palette.grey[100],
+                  borderRadius: "10%",
+                  textDecoration: "underline",
+                },
+              }}
+              onClick={() => navigate("/stats")}
+            >
+              <AnalyticsOutlinedIcon />
+              <Typography variant="h6">Analytics</Typography>
             </Box>
           </Box>
-        </>
-      )}
+          <Box sx={{ mb: theme.spacing(3) }}>
+            {
+            
+            navbarOpen && <Button
+              sx={{
+                width: 50,
+                height: 50,
+                minWidth: 0,
+                borderRadius: "60%",
+                boxShadow: theme.shadows[10]
+              }}
+              onClick={() => setNavBarOpen(false)}
+            >
+              {" "}
+              <ArrowBackOutlinedIcon />{" "}
+            </Button>
+}
+          </Box>
+        </Box>
+      </>
       <Box
-        width={navbarOpen ? "90%" : "100%"}
-        sx={{ backgroundColor: theme.palette.success.main }}
+        width={navbarOpen ? "88%" : "100%"}
+        sx={{backgroundColor : "rgba(255, 99, 71, 0.1)"}}
       >
         {children}
       </Box>
